@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
- 
  def show
    @user = User.find(params[:id])
  end
@@ -15,9 +14,9 @@ class UsersController < ApplicationController
    # セキュリティ強化の為。
   @user = User.new(user_params)
   if @user.save
-    flash[:success] = '新規作成に成功しました。'
+     flash[:success] = '新規作成に成功しました。'
    # ↓　redirect_to user_url(@user)を略せる。
-    redirect_to @user
+     redirect_to @user
   else
    render :new
   end

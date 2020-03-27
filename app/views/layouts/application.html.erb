@@ -3,26 +3,20 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- HTML shimがこの1行で収まる -->
+    <%= stylesheet_link_tag    'application', media: 'all',
+                               'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application',
+                               'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/shim' %>
   </head>
-
   <body>
-       <!-- headerの内容がこの1行で収まる -->
-       <%= render 'layouts/header' %>
-       <div class="container">
-         <!-- レイアウトファイルにflashのキーが存在するか判定し、
-         もし存在した場合は全てのメッセージを表示する。
-         flashというオブジェクトを対象にハッシュのキーとバリューを繰り返し処理-->
-         <% flash.each do |message_type, msg| %>
-          <div class="alert alert-<%= message_type %>"><%= msg %></div>
-         <% end %>
-         <%= yield %>
-         <!-- デバック情報を各ページに表示することで開発効率が向上する。　
-         （アプリではなく開発環境のみに表示）--> 
-         <%= debug(params) if Rails.env.development? %>
-       </div>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <% flash.each do |message_type, msg| %>
+        <div class="alert alert-<%= message_type %>"><%= msg %></div>
+      <% end %>
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>
