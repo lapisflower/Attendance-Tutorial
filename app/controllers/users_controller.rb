@@ -5,7 +5,7 @@ class UsersController < ApplicationController
  #アクセスしたユーザーが現在ログインしているユーザーであるか確認.
  before_action :correct_user, only: [:edit, :update]
  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
- 
+ before_action :set_one_month, only: :show
  
  # すべてのユーザー一覧ページ
  # すべてのユーザーを代入した複数形のためインスタンス変数は@users となる。
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
  end
  
  def show
+  @worked_sum = @attendances.where.not(started_at: nil).count
  end
 
  def new
