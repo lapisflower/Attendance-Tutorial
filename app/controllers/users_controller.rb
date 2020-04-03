@@ -74,32 +74,7 @@ class UsersController < ApplicationController
   def user_params
    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
   end  
-  
-  
- 
- # beforeフィルター
- 
- def set_user
-  @user = User.find(params[:id])
- end
- 
- #ログイン済みのユーザーか確認する。logged_in?ヘルパーメソッド活用。 
-  def logged_in_user
-   unless logged_in?
-     store_location
-     flash[:danger] = "ログインしてください。"
-     redirect_to login_url
-   end
-  end
-  
-  def correct_user
-   redirect_to(root_url) unless current_user?(@user)
-  end
-  
-  def admin_user
-   redirect_to root_url unless current_user.admin?
-  end
-  
+
   def basic_info_params
    params.require(:user).permit(:department, :basic_time, :work_time)
   end
